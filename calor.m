@@ -17,7 +17,7 @@ num_lines = 1;
 def = {'1','1','0.1','C'};
 answer = inputdlg(prompt,dlg_title,num_lines,def);
 
-str = {'Forward finite diferences','Backward finite diferences','Centered finite diferences'};
+str = {'Forward finite diferences','Backward finite diferences','Centered finite diferences','Crank-Nicholson in time'};
 [s,v] = listdlg('PromptString','Select a method:',...
                 'SelectionMode','single',...
                 'ListString',str);
@@ -59,6 +59,14 @@ if s==2
         B=matriz2D(A,sigma1,sigma2,x(1),x(2)); %calculo los valores de los extremos de la matriz solución
         C=MatrizSolucion2(A,B,sigma1,sigma2,x(1),x(2));   
         A=C; 
+    end
+end
+
+if s==4    
+    while(T<10)
+        T=deltaT+T;   %aumento el paso
+        C=MatrizSolucion(A,sigma1,sigma2,x(1),x(2));   
+        A=(C+A)/2; 
     end
 end
 
