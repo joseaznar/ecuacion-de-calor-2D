@@ -65,10 +65,8 @@ end
 if s==1
     while(T<10)
         T=deltaT+T;   %aumento el paso
-        H=matriz2D(A,sigma1,sigma2,x(1),x(2)); %calculo los valores de los extremos de la matriz solución
-        J=MatrizSolucion2(A,H,sigma1,sigma2,x(1),x(2));
         C=matrizSolucionAdelante(A,sigma1,sigma2,x(1),x(2));   
-        A=(J+C)/2; 
+        A=C; 
     end
 end
 if s==3
