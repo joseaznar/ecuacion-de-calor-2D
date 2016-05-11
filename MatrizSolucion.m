@@ -1,4 +1,4 @@
-function C = MatrizSolucion(A,sigma,sigma1,sigma2,tamF,tamC)
+function C = MatrizSolucion(A,sigma1,sigma2,tamF,tamC)
 %lleno la matriz con la ecuación de calor en 2D con respecto a la matriz
 %del paso anterior (A)
 %checo las excepciones en los límites de la matriz, al ser un sistema
