@@ -11,27 +11,22 @@
 % Leer la imagen original 'coins.png' y mostrarla
 close all
 
-prompt = {'Enter delta X:','Enter delta Y:','Enter delta T'};
+prompt = {'Enter delta X:','Enter delta Y:','Enter delta T','Enter F if forward, B if backwards or C if centered:'};
 dlg_title = 'Input';
 num_lines = 1;
 def = {'1','1','0.1','C'};
 answer = inputdlg(prompt,dlg_title,num_lines,def);
 
-str = {'Forward finite diferences','Backward finite diferences','Centered finite diferences'};
-[s,v] = listdlg('PromptString','Select a method:',...
-                'SelectionMode','single',...
-                'ListString',str);
-
 A=imread('coins.png');
 
 A=im2double(A);
 Z=A;
-figure(1)
-  imshow(A);
+% figure(1)
+%   imshow(A);
   
 % Distribucion inicial de temperaturas f(x,y)
-figure(2)
-  mesh(A);
+% figure(2)
+%   mesh(A);
   
 %----------------------------------------------------------------------
 % Aplicar la ec. del calor (Euler explicito + diferencias finitas) 
@@ -43,7 +38,7 @@ figure(2)
 %----------------------------------------------------------------------
 D=0.1;
 deltaX=str2double(answer(1));
-deltaY=str2double(answer(2));
+deltaY=str2double((2));
 deltaT=str2double(answer(3));
 T=0;
 %calculo las sigmas para la ecuación de calor, donde sigma1 es para x y
@@ -52,8 +47,9 @@ sigma1=D*deltaT/(deltaX*deltaX);
 sigma2=D*deltaT/(deltaY*deltaY);
 sigma=sigma1/(deltaY*deltaY);
 x=size(A);
+y=upper(answer(4));
 %itero hasta que se cumplan los diez segundos con un paso de deltaT
-if s==2
+if y=='B'
     while(T<10)
         T=deltaT+T;   %aumento el paso
         B=matriz2D(A,sigma1,sigma2,x(1),x(2)); %calculo los valores de los extremos de la matriz solución
@@ -62,16 +58,16 @@ if s==2
     end
 end
 
-if s==1
+if y=='F'
     while(T<10)
         T=deltaT+T;   %aumento el paso
         H=matriz2D(A,sigma1,sigma2,x(1),x(2)); %calculo los valores de los extremos de la matriz solución
-        J=MatrizSolucion2(A,H,sigma1,sigma2,x(1),x(2));
+        J=MatrizSolucion2(A,B,sigma1,sigma2,x(1),x(2));
         C=matrizSolucionAdelante(A,sigma1,sigma2,x(1),x(2));   
         A=(J+C)/2; 
     end
 end
-if s==3
+if y=='C'
     while(T<10)
         T=deltaT+T;   %aumento el paso
         C=MatrizSolucion(A,sigma1,sigma2,x(1),x(2));   
