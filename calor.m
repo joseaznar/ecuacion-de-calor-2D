@@ -52,16 +52,19 @@ sigma1=D*deltaT/(deltaX*deltaX);
 sigma2=D*deltaT/(deltaY*deltaY);
 sigma=sigma1/(deltaY*deltaY);
 x=size(A);
-%itero hasta que se cumplan los diez segundos con un paso de deltaT
+%itero hasta que se cumplan los diez segundos con un paso de deltaT con el
+%método y los parámetros seleccionados por el usuario
+%diferencias finitas hacia atrás
 if s==2
     while(T<10)
         T=deltaT+T;   %aumento el paso
-        B=matriz2D(A,sigma1,sigma2,x(1),x(2)); %calculo los valores de los extremos de la matriz solución
+        B=matriz2D(A,sigma1,sigma2,x(1),x(2)); %bordes de la matriz solución para manejar las excepciones
         C=MatrizSolucion2(A,B,sigma1,sigma2,x(1),x(2));   
         A=C; 
     end
 end
 
+%Método crank nicholson que utiliza los puntos en t y en t-1
 if s==4    
     while(T<10)
         T=deltaT+T;   %aumento el paso
@@ -70,6 +73,7 @@ if s==4
     end
 end
 
+%diferencias finitas hacia adelante
 if s==1
     while(T<10)
         T=deltaT+T;   %aumento el paso
@@ -77,6 +81,10 @@ if s==1
         A=C; 
     end
 end
+
+%diferencias finitas centradas (es la única que funciona bien, los demás
+%hicimos el análisis matemático para obtener las fórmulas pero al correr el
+%programa nos dan graficas claramente equivocadas). 
 if s==3
     while(T<10)
         T=deltaT+T;   %aumento el paso

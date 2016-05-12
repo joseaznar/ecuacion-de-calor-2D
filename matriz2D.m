@@ -1,4 +1,6 @@
 function C = matriz2D(A,sigma1,sigma2,numFilas,numColumnas)
+%en este método calculamos el contorno con diferencias finitas hacia atrás
+%de la matriz para que sea más fácil evaluar en el siguiente
 C=zeros(numFilas,numColumnas);
 for i=1:numFilas
     for j=1:numColumnas

@@ -1,6 +1,8 @@
 function C = MatrizSolucion2(A,B,sigma1,sigma2,tamF,tamC)
 %lleno la matriz con la ecuación de calor en 2D con respecto a la matriz
-%del paso anterior (A)
+%del paso anterior (A) con diferencias finitas hacia atrás, utilizo los
+%bordes que ya llené con el método matriz2D() para ya no tener que
+%controlas las excepciones aquí
 C=zeros(tamF,tamC);
 C(:,[1,2])=B(:,[1,2]);
 C([1,2],:)=B([1,2],:);

@@ -1,4 +1,7 @@
 function C = matrizSolucionAdelante(A,sigma1,sigma2,numFilas,numColumnas)
+%Ocupo diferencias finitas hacia adelante para llenar la matriz, cualquier
+%índice que esté fuera de la matriz lo considero como 0, pues al ser un 
+%sistema aislado solo es afectado por lo que ocurre en él mismo
 C=zeros(numFilas,numColumnas);
 for i=1:numFilas
     for j=1:numColumnas

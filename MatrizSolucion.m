@@ -1,6 +1,6 @@
 function C = MatrizSolucion(A,sigma1,sigma2,tamF,tamC)
 %lleno la matriz con la ecuación de calor en 2D con respecto a la matriz
-%del paso anterior (A)
+%del paso anterior (A) con diferencias finitas centradas
 %checo las excepciones en los límites de la matriz, al ser un sistema
 %aislado cuando un índice está fuera de la matriz no afecta al siguiente
 %estado en el tiempo.
